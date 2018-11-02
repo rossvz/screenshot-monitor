@@ -2,22 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import ms from 'milliseconds'
 import ScreenshotGrid from './ScreenshotGrid'
-import {getDevices} from './helpers'
-
-
-const useDevices = (currentIndex)=>{
-  const [loading,setLoading] = useState(false)
-  const [devices,setDevices] = useState([])
-  useEffect(async () => {
-  	if (!devices.length || currentIndex + 32 > devices.length){
-			setLoading(true)
-			const data = await getDevices()
-			setDevices(data)
-			setLoading(false)
-		}
-	},[currentIndex])
-  return {loading,devices}
-}
+import { useDevices } from './hooks'
 
 const App = () => {
   const [currentIndex, setCurrentIndex] = useState(0)

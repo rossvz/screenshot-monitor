@@ -9,6 +9,7 @@ const Screenshot = props => {
         src={props.device.screenshot}
         alt=""
         onError={(e) => {
+          e.preventDefault()
           e.target.onerror = null
           e.target.src = 'http://via.placeholder.com/683x384/1f2532/ffffff?text=N/A'
         }}

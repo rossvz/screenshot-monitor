@@ -13,7 +13,7 @@ const App = () => {
         setCurrentIndex(
           currentIndex + 32 >= devices.length ? 0 : currentIndex + 32
         )
-      }, ms.seconds(5))
+      }, ms.seconds(20))
     },
     [currentIndex, devices.length]
   )

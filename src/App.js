@@ -7,16 +7,13 @@ import ScreenshotGrid from './ScreenshotGrid'
 const App = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const { loading, devices } = useDevices(currentIndex)
-  useEffect(
-    () => {
-      setTimeout(() => {
-        setCurrentIndex(
-          currentIndex + 32 >= devices.length ? 0 : currentIndex + 32
-        )
-      }, ms.seconds(20))
-    },
-    [currentIndex, devices.length]
-  )
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrentIndex(
+        currentIndex + 32 >= devices.length ? 0 : currentIndex + 32
+      )
+    }, ms.seconds(20))
+  }, [currentIndex, devices.length])
   return (
     <div className="App">
       {currentIndex}-{currentIndex + 32} /{devices.length} screenshots

@@ -4,15 +4,19 @@ import { getDevices } from './helpers'
 export const useDevices = currentIndex => {
   const [loading, setLoading] = useState(false)
   const [devices, setDevices] = useState([])
+
   useEffect(
-    async () => {
-      if (!devices.length || currentIndex + 32 >= devices.length) {
-        setDevices([])
-        setLoading(true)
-        const data = await getDevices()
-        setDevices(data)
-        setLoading(false)
+    () => {
+      async function rotateIndex(){
+        if (!devices.length || currentIndex + 32 >= devices.length) {
+          setDevices([])
+          setLoading(true)
+          const data = await getDevices()
+          setDevices(data)
+          setLoading(false)
+        }
       }
+      rotateIndex()
     },
     [currentIndex]
   )

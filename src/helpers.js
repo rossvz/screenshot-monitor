@@ -5,8 +5,14 @@ const getStoreIdQueryParam = () => {
   const url = new URL(window.location.href)
   return url.searchParams.get('storeId') || null
 }
+
+const getStoreNameQueryParam = () => {
+  const url = new URL(window.location.href)
+  return url.searchParams.get('name') || null
+}
 export const formatStoreData = stores => {
   const storeFilter = getStoreIdQueryParam()
+  const storeName = getStoreNameQueryParam()
   return stores
     .map(store =>
       store.devices
@@ -16,8 +22,8 @@ export const formatStoreData = stores => {
             moment(Number(device.moki_screenshot_date)).isAfter(
               moment().subtract(3, 'days')
             )
-          const matchesFilter = storeFilter
-            ? device.storeId === Number(storeFilter)
+          const matchesFilter = storeFilter || storeName
+            ? (device.storeId === Number(storeFilter) || device.name.toLowerCase().includes(storeName))
             : true
           return recentScreenshot && matchesFilter
         })
